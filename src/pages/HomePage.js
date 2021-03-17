@@ -1,13 +1,15 @@
 import React from 'react';
+
 import { Row,Col } from 'react-bootstrap';
 
+//Component Import
 import Product from '../components/Product'; 
 
-
+//Products.js file import
 import products from '../products';
 
 
-function HomeScreen() {
+function HomePage() {
     return (
         <div>
             <h1> Latest products </h1>
@@ -23,4 +25,4 @@ function HomeScreen() {
     )
 }
 
-export default HomeScreen;
+export default HomePage;
