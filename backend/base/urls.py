@@ -3,6 +3,7 @@ from . import views
 
 # connect views to urls
 
+
 urlpatterns = [
     path('',views.getRoutes, name="routes"),
     path('products/',views.getProducts, name="products"),
