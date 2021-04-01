@@ -1,6 +1,6 @@
 import React, {useState,useEffect} from 'react';
 import {Link} from 'react-router-dom'; 
-import {Row,Col,Image,ListGroup, Button,Card} from 'react-bootstrap';
+import {Row,Col,Image,ListGroup, Button,Card, ListGroupItem} from 'react-bootstrap';
 import Rating from '../components/Rating'; 
 import axios from 'axios';
 // import products from '../products'; 
@@ -13,12 +13,12 @@ function ProductPage({match}) {
     const [product, setProduct] = useState([])
     useEffect(() => {
 
-        async function fetchProducts(){
-            const { data } = await axios.get(`/api/products/${match.params.id}`)
+        async function fetchProduct(){
+            const { data } = await axios.get(`/api/products/${ match.params.id }`)
             setProduct(data)          
         }   
 
-        fetchProducts()
+        fetchProduct()
     }, [])
     
     
@@ -90,7 +90,7 @@ function ProductPage({match}) {
                              
                             {/* Stock Status */}
                             <ListGroup.Item>
-                                <Button className ='btn-block' disabled={product.countInStock == 0 } type='button'> Add to Cart </Button>
+                                <Button className ='btn-block' disabled={product.countInStock === 0 } type='button'> Add to Cart </Button>
                             </ListGroup.Item>
 
                         </ListGroup>    
