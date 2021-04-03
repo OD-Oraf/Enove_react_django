@@ -5,6 +5,8 @@ import { Row,Col } from 'react-bootstrap';
 
 //Component Import
 import Product from '../components/Product';
+import Loader from '../components/Loader';
+import Message from '../components/Message';
 
 import { listProducts } from '../actions/productActions'
 
@@ -35,8 +37,9 @@ function HomePage() {
         <div>
             <h1> Latest products </h1>
             {/* displaying products in array  */}
-            {loading ? <h2>Loading... </h2>
-                : error ? <h3>{error}</h3> 
+            {loading ? <Loader> </Loader>
+                // pass error as child into component
+                : error ? <Message variant='danger'>{error}</Message> 
                     :
                     <Row>
                         {products.map(product => (
