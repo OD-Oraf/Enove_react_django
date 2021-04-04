@@ -11,6 +11,7 @@ import Footer from './components/Footer';
 // Page Components
 import HomePage from './pages/HomePage';
 import ProductPage from './pages/ProductPage';
+import CartPage from './pages/CartPage';
 
 function App() {
   return (
@@ -22,6 +23,8 @@ function App() {
           <Route path = '/' component = {HomePage} exact/>
           {/* Render products by id */}
           <Route path = '/product/:id' component = {ProductPage} exact/>
+          {/* ? makes the id optional */}
+          <Route path = '/cart/:id?' component = {CartPage} exact />
         </Container>
       </main>
 
