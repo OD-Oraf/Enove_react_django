@@ -1,4 +1,4 @@
-import axios from 'axois'; 
+import axios from 'axios'; 
 import { CART_ADD_ITEM } from '../constants/cartConstants';
 
 // getState allows us to get any art of this state
@@ -7,7 +7,7 @@ import { CART_ADD_ITEM } from '../constants/cartConstants';
 //they can come back and continue shopping without an account
 export const addToCart = (id,qty) => async (dispatch, getState) => {
     //api call to get product data
-    const {date} = await axios.get(`/api/products/${id}`)
+    const {data} = await axios.get(`/api/products/${id}`)
 
     dispatch({
         type : CART_ADD_ITEM,
@@ -21,5 +21,5 @@ export const addToCart = (id,qty) => async (dispatch, getState) => {
         }
     })
     //keeps this information in your local storage
-    localStorage.setItem('cartItems',JSON.stringify(getState.cart.cartItems)) 
+    localStorage.setItem('cartItems',JSON.stringify(getState().cart.cartItems)) 
 }
