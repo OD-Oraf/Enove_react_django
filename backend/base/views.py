@@ -18,6 +18,10 @@ from .serializers import ProductSerializer, UserSerializer,UserSerializerWithTok
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 
+#hashpassword
+from django.contrib.auth.hashers import make_password
+from rest_framework import status
+
 #Below code taken from
 #https://github.com/jazzband/django-rest-framework-simplejwt/blob/master/rest_framework_simplejwt/serializers.py
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -37,23 +41,44 @@ class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
 
 
-@api_view(['GET'])
-def getRoutes(request): 
-    routes = [
-        '/api/products/',
-        '/api/products/create/',
+# @api_view(['GET'])
+# def getRoutes(request): 
+#     routes = [
+#         '/api/products/',
+#         '/api/products/create/',
 
-        '/api/products/upload/',
+#         '/api/products/upload/',
 
-        '/api/products/<id>/reviews/',
+#         '/api/products/<id>/reviews/',
 
-        '/api/products/top/',
-        '/api/products/<id>/',
+#         '/api/products/top/',
+#         '/api/products/<id>/',
 
-        '/api/products/delete/<id>/',
-        '/api/products/update/<id>/',
-    ]
-    return Response(routes)
+#         '/api/products/delete/<id>/',
+#         '/api/products/update/<id>/',
+#     ]
+#     return Response(routes)
+
+@api_view(['POST'])
+def registerUser(request): 
+    data = request.data
+    try: 
+        user = User.objects.create(
+            first_name = data['name'],
+            username = data['email'],
+            email = data['email'],
+            password = make_password(data['password'])
+        )
+
+        #One user object, many = False
+        serializer = UserSerializerWithToken(user, many=False)
+        
+        return Response(serializer.data)
+
+    except: 
+        message = {'detail' : 'user with this email already exists'}
+        return Response(message, status = status.HTTP_400_BAD_REQUEST) 
+
 
 #need to send token in order to get back user
 @api_view(['GET'])
