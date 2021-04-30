@@ -1,7 +1,10 @@
 from django.shortcuts import render
 from django.http import JsonResponse
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
+
+from django.contrib.auth.models import User
 
 from .models import Product
 from .products import products
@@ -54,6 +57,8 @@ def getRoutes(request):
 
 #need to send token in order to get back user
 @api_view(['GET'])
+#user profile view restricted by authenticated user
+@permission_classes([IsAuthenticated])
 def getUserProfile(request): 
     #get user from api token
     user = request.user 
@@ -62,13 +67,22 @@ def getUserProfile(request):
     serializer = UserSerializer(user, many=False)
     return Response(serializer.data)
 
+
+@api_view(['GET'])
+@permission_classes([IsAdminUser])
+def getUsers(request): 
+    users = User.objects.all()
+    serializer = UserSerializer(users, many=True )
+    return Response(serializer.data)
+
+
+
 @api_view(['GET'])
 def getProducts(request): 
-
     #.all() return/query all products from the database
     # IN rest-framework, data needs to be serialized before returned to the frontend
     # If not serialized, will return error Object of type '' is not JSON serializable
-    # Serialze turns the data to JSON form 
+    # Serialize turns the data to JSON form 
     products = Product.objects.all()
     # Many=True serializing many products instead of just one 
     serializer = ProductSerializer(products, many=True)
