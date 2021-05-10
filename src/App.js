@@ -12,6 +12,7 @@ import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import ProductPage from './pages/ProductPage';
 import CartPage from './pages/CartPage';
+import LoginPage from './pages/LoginPage';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
       <main className = "py-5"> 
         <Container>
           <Route path = '/' component = {HomePage} exact/>
+          <Route path = '/login' component = {LoginPage} />
           {/* Render products by id */}
           <Route path = '/product/:id' component = {ProductPage} exact/>
           {/* ? makes the id optional */}

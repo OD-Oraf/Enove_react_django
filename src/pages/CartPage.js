@@ -37,7 +37,7 @@ function CartPage({ match, location, history }) {
     }
     return (
         <Row>
-            <Col md = {8}>
+            <Col md ={8}>
                 <h1> Shopping Cart</h1>
                 {cartItems.length === 0 ? (
                     <Message variant='info' > 
@@ -100,7 +100,7 @@ function CartPage({ match, location, history }) {
                 )}
             </Col>
 
-            <Col md = {4}>
+            <Col md ={4}>
                 <Card>
                     <ListGroup variant='flush'> 
                         <ListGroup.Item>  
