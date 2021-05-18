@@ -4,7 +4,7 @@ from base.views import user_views as views
 
 # connect views to urls
 urlpatterns = [
-    path('login', views.MyTokenObtainPairView.as_view(), 
+    path('login/', views.MyTokenObtainPairView.as_view(), 
         name='token_obtain_pair'),
     # path('',views.getRoutes, name="routes"),
 
