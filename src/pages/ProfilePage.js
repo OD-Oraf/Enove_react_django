@@ -4,7 +4,8 @@ import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useDispatch,useSelector } from 'react-redux';
 import Loader from '../components/Loader'; 
 import Message from '../components/Message';
-import { getUserDetails } from '../actions/userActions'; 
+import { getUserDetails, updateUserProfile } from '../actions/userActions'; 
+import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstants'; 
 
 function ProfilePage({ history }) {
 
@@ -23,6 +24,10 @@ function ProfilePage({ history }) {
     const userLogin = useSelector(state => state.userLogin)
     const{ userInfo } = userLogin
 
+    const userUpdateProfile = useSelector(state => state.userUpdateProfile)
+    const{ success } = userUpdateProfile
+     
+
 
     //prevent logged in user from seeing login page
     useEffect(() => {
@@ -30,7 +35,8 @@ function ProfilePage({ history }) {
             //send user to login of not logged in
             history.push('/login')
         }else{
-            if(!user || !user.name){
+            if(!user || !user.name || success ){
+                dispatch({ type:USER_UPDATE_PROFILE_RESET })
                 dispatch(getUserDetails('profile'))
 
             }else {
@@ -38,7 +44,7 @@ function ProfilePage({ history }) {
                 setEmail(user.email)
             }
         }
-    }, [dispatch , history, userInfo, user])
+    }, [dispatch , history, userInfo, user, success])
 
     //Get email,password from userActions and make call to api/users/login
     const submitHandler = (e) => {
@@ -47,7 +53,13 @@ function ProfilePage({ history }) {
         if(password != confirmPassword ){
             setMessage('Passwords do not match')
         }else {
-            console.log('Updating...')
+            dispatch(updateUserProfile({
+                'id': user._id, 
+                'name': name,
+                'email': email,
+                'password': password
+            }))
+            setMessage('')
         }
         // dispatch(register(name, email, password))
     }
