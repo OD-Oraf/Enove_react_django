@@ -12,7 +12,7 @@ function Product({ product }) {
         // margin 3, padding 3 , rounded borders 
         <Card className = "my-3 p-3 rounded">
             {/* product images by id */}
-            {/*  ALso using Javascript object literals */}
+            {/*  Also using Javascript object literals */}
             <Link to = {`/product/${product._id}`}> 
                 <Card.Img src ={product.image} /> 
             </Link>
