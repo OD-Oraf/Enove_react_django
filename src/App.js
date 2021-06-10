@@ -16,6 +16,7 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import ProfilePage from './pages/ProfilePage';
 import ShippingPage from './pages/ShippingPage';
+import PaymentPage from './pages/PaymentPage';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Route path = '/register' component = {RegisterPage} />
           <Route path = '/profile' component = {ProfilePage} />
           <Route path = '/shipping' component = {ShippingPage} />
+          <Route path = '/payment' component = {PaymentPage} />
           {/* Render products by id */}
           <Route path = '/product/:id' component = {ProductPage} exact/>
           {/* ? makes the id optional */}
