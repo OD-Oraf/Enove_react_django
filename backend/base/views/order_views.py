@@ -11,19 +11,19 @@ from base.serializers import ProductSerializer, OrderSerializer
 from rest_framework import status
 
 @api_view(['POST'])
-@permission_classes(['IsAuthenticated'])
+@permission_classes([IsAuthenticated])
 def addOrderItems(request):
     #from json webtoken 
     user = request.user
     data = request.data
 
     #orderItems from frontend
-    orderItems = data['orderItems']
+    orderItems = data['orderItems'] 
 
     if orderItems and len(orderItems) == 0: 
-        return Response({'detail' : 'No order Items'}, status=status.HTTP_400_BAD_REQUEST )
+        return Response({'detail' : 'No order Items'}, status=status.HTTP_400_BAD_REQUEST)
     
-    else: 
+    else:
         # create order
         #also from models.py
         order = Order.objects.create(
@@ -31,7 +31,7 @@ def addOrderItems(request):
             paymentMethod = data['paymentMethod'], 
             taxPrice = data['taxPrice'], 
             shippingPrice = data['shippingPrice'],
-            totalPrice = data['totalPrice'], 
+            totalPrice = data['totalPrice'],
 
 
         )
@@ -56,11 +56,32 @@ def addOrderItems(request):
                 image=product.image.url
             )
 
-        # Update Stock
-        product.countInStock -= item.qty
-        product.save()
+            # Update Stock
+            product.countInStock -= item.qty
+            product.save()
 
 
 
-    serializer = OrderSerializer(order, many=True)
-    return Response(serializer.data)
+        serializer = OrderSerializer(order, many=False)
+        return Response(serializer.data)
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def getOrderById(request, pk): 
+    user = request.user
+
+    try:
+        order = Order.objects.get(_id=pk)
+        if user.is_staff or order.user == user : 
+            serializer = OrderSerializer(order, many=False)
+            return Response(serializer.data)
+
+        else:
+            Response({'detail':'Not authorized to view this order'}, 
+                status=status.HTTP_400_BAD_REQUEST) 
+
+    except: 
+        return Response({'detail' : 'Order does not exist'},
+            status=status.HTTP_400_BAD_REQUEST )
+
+        
