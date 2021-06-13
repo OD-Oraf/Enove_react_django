@@ -9,7 +9,8 @@ import {
     userRegisterReducer, 
     userDetailsReducer, 
     userUpdateProfileReducer, 
-    userListReducer 
+    userListReducer ,
+    userDeleteReducer,
 } from './reducers/userReducers';
 
 import { 
@@ -22,18 +23,23 @@ import {
 const reducer = combineReducers ({
     productList : productListReducer,
     productDetails : productDetailsReducer,
+    
     //should add the cart to state
     cart : cartReducer,
+
     userLogin : userLoginReducer, 
     userRegister : userRegisterReducer, 
     userDetails : userDetailsReducer,
     userUpdateProfile : userUpdateProfileReducer,
     userList : userListReducer,
+    userDelete : userDeleteReducer,
+
     orderCreate : orderCreateReducer,
     orderCreate : orderCreateReducer,
     orderDetails : orderDetailsReducer,
     orderPay : orderPayReducer,
-    orderListMy : orderListMyReducer,    
+    orderListMy : orderListMyReducer,   
+ 
 })
 
 // pull data from localStorage and put load into state
