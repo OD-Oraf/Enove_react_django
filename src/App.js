@@ -19,6 +19,7 @@ import ShippingPage from './pages/ShippingPage';
 import PaymentPage from './pages/PaymentPage';
 import PlaceOrderPage from './pages/PlaceOrderPage';
 import OrderPage from './pages/OrderPage';
+import UserListPage from './pages/UserListPage';
 
 function App() {
   return (
@@ -39,6 +40,10 @@ function App() {
           <Route path = '/product/:id' component = {ProductPage} exact/>
           {/* ? makes the id optional */}
           <Route path = '/cart/:id?' component = {CartPage} exact />
+
+
+          <Route path = '/admin/userList' component = {UserListPage} />
+
         </Container>
       </main>
 
