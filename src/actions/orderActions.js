@@ -104,7 +104,7 @@ export const getOrderDetails = (id) => async (dispatch, getState)  => {
     }
 }
 
-export const payOrder = (id,paymentResult) => async (dispatch, getState)  => {
+export const payOrder = (id, paymentResult) => async (dispatch, getState)  => {
     try{
         dispatch({
             type: ORDER_PAY_REQUEST
@@ -129,10 +129,10 @@ export const payOrder = (id,paymentResult) => async (dispatch, getState)  => {
 
         dispatch({
             type: ORDER_PAY_SUCCESS, 
-            payload:data
+            payload : data
         })
 
-        localStorage.removeItem('cartItems')
+        // localStorage.removeItem('cartItems')
 
 
     } catch(error){
