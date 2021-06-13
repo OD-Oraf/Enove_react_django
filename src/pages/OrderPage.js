@@ -206,8 +206,9 @@ function OrderPage({ match }) {
                                         ) : (
                                             <PayPalButton
                                                 amount = {order.totalPrice}
-                                                onSuccess = {successPaymentHandler}                                             
-                                            />                                            
+                                                onSuccess = {successPaymentHandler}
+                                                // shippingPreference = {order.shippingAddress}                                         
+                                            />                                          
                                         )}
                                     </ListGroup.Item>
                                 )}                          
