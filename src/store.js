@@ -2,8 +2,19 @@ import { createStore, combineReducers,applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension'; 
 
-import { productListReducer,productDetailsReducer } from './reducers/productReducers';
+
+
+//Product Reducers
+import { 
+    productListReducer, 
+    productDetailsReducer,
+    productDeleteReducer,
+} from './reducers/productReducers';
+
+//Cart Reducer
 import { cartReducer } from './reducers/cartReducers'; 
+
+//User Reducers 
 import { 
     userLoginReducer,
     userRegisterReducer, 
@@ -14,6 +25,7 @@ import {
     userUpdateReducer,
 } from './reducers/userReducers';
 
+// Order Reducers
 import { 
     orderCreateReducer, 
     orderDetailsReducer, 
@@ -21,13 +33,20 @@ import {
     orderListMyReducer 
 } from './reducers/orderReducers';  
 
+
+//Reducer Imports
 const reducer = combineReducers ({
+    //Product Reducers
     productList : productListReducer,
     productDetails : productDetailsReducer,
+    productDelete : productDeleteReducer,
+
     
     //should add the cart to state
+    //Cart Reducer
     cart : cartReducer,
 
+    //User reducers
     userLogin : userLoginReducer, 
     userRegister : userRegisterReducer, 
     userDetails : userDetailsReducer,
@@ -36,12 +55,12 @@ const reducer = combineReducers ({
     userDelete : userDeleteReducer,
     userUpdate : userUpdateReducer, 
 
+    //Order reducers
     orderCreate : orderCreateReducer,
     orderCreate : orderCreateReducer,
     orderDetails : orderDetailsReducer,
     orderPay : orderPayReducer,
     orderListMy : orderListMyReducer,   
- 
 })
 
 // pull data from localStorage and put load into state
