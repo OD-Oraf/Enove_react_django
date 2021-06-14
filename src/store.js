@@ -9,6 +9,7 @@ import {
     productListReducer, 
     productDetailsReducer,
     productDeleteReducer,
+    productCreateReducer, 
 } from './reducers/productReducers';
 
 //Cart Reducer
@@ -40,6 +41,7 @@ const reducer = combineReducers ({
     productList : productListReducer,
     productDetails : productDetailsReducer,
     productDelete : productDeleteReducer,
+    productCreate : productCreateReducer,
 
     
     //should add the cart to state
