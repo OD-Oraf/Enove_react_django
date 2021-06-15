@@ -1,4 +1,5 @@
 import React,{ useState,useEffect } from 'react'; 
+import axios from 'axios';
 import { Link, Redirect } from 'react-router-dom'; 
 import { Form, Button, Row, Col } from 'react-bootstrap'; 
 import { useDispatch,useSelector } from 'react-redux';
@@ -21,6 +22,7 @@ function ProductEditPage({ match, history }) {
     const [category, setCategory] = useState('')
     const [countInStock, setCountInStock] = useState(0)
     const [description, setDescription] = useState('')
+    const [uploading, setUploading] = useState(false)
     
     const dispatch = useDispatch()
  
@@ -41,7 +43,7 @@ function ProductEditPage({ match, history }) {
             }else{
                 setName(product.name)
                 setPrice(product.price)
-                setImage(product.Image)
+                setImage(product.image)
                 setBrand(product.brand)
                 setCategory(product.category)
                 setCountInStock(product.countInStock)
@@ -67,6 +69,34 @@ function ProductEditPage({ match, history }) {
             countInStock,
             description,
         }))
+
+    }
+
+    const uploadFileHandler = async (e) => {
+        const file = e.target.files[0]
+        const formData = new FormData()
+
+        formData.append('image', file)
+        formData.append('product_id', productId)
+
+        setUploading(true)
+
+        try{
+            // Send image field with the post request
+            const config = {
+                headers:{
+                    'Content-Type' : 'multipart/form-data'
+                }
+            }
+
+            const {data} = await axios.post('/api/products/upload/', formData, config)
+
+            setImage(data)
+            setUploading(false)
+
+        }catch(error){
+            setUploading(false)
+        }
 
     }
 
@@ -119,7 +149,17 @@ function ProductEditPage({ match, history }) {
                                 value={image}
                                 onChange={(e) => setImage( e.target.value )}
                             >
-                            </Form.Control>                
+                            </Form.Control>    
+
+                            <Form.File
+                                id = 'image-file'
+                                label = 'Choose File'
+                                custom
+                                onChange={uploadFileHandler}
+                            >
+                                
+                            </Form.File>   
+                            {uploading && <Loader/> }         
                         </Form.Group>
 
                       
