@@ -23,6 +23,8 @@ import UserListPage from './pages/UserListPage';
 import UserEditPage from './pages/UserEditPage';
 import ProductListPage from './pages/ProductListPage';
 import ProductEditPage from './pages/ProductEditPage';
+import OrderListPage from './pages/OrderListPage';
+
 
 
 function App() {
@@ -46,11 +48,14 @@ function App() {
           <Route path = '/cart/:id?' component = {CartPage} exact />
 
 
-          <Route path = '/admin/userList' component = {UserListPage} />
+          <Route path = '/admin/userlist' component = {UserListPage} />
           <Route path = '/admin/user/:id/edit' component = {UserEditPage} />
 
-          <Route path = '/admin/productList' component = {ProductListPage} />
+          <Route path = '/admin/productlist' component = {ProductListPage} />
           <Route path = '/admin/product/:id/edit' component = {ProductEditPage} />
+
+          <Route path = '/admin/orderlist' component = {OrderListPage} />
+
 
 
 

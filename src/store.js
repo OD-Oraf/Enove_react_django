@@ -11,6 +11,7 @@ import {
     productDeleteReducer,
     productCreateReducer,
     productUpdateReducer, 
+    productCreateReviewReducer, 
 } from './reducers/productReducers';
 
 //Cart Reducer
@@ -32,7 +33,10 @@ import {
     orderCreateReducer, 
     orderDetailsReducer, 
     orderPayReducer,
-    orderListMyReducer 
+    orderListMyReducer,
+    orderListReducer,
+    orderDeliverReducer,
+
 } from './reducers/orderReducers';  
 
 
@@ -44,6 +48,7 @@ const reducer = combineReducers ({
     productDelete : productDeleteReducer,
     productCreate : productCreateReducer,
     productUpdate : productUpdateReducer,
+    productCreateReview: productCreateReviewReducer,
 
     
     //should add the cart to state
@@ -65,6 +70,9 @@ const reducer = combineReducers ({
     orderDetails : orderDetailsReducer,
     orderPay : orderPayReducer,
     orderListMy : orderListMyReducer,   
+    orderList : orderListReducer,   
+    orderDeliver : orderDeliverReducer,
+
 })
 
 // pull data from localStorage and put load into state
